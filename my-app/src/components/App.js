@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom"
 import NavBar from "./NavBar"
 import Home from "./Home"
 import GoalPage from "./GoalPage"
-import LoggingPage from "./LoggingPage";
+import LogPage from "./LogPage";
 import TrackingPage from "./TrackingPage"
 
 function App() {
@@ -13,31 +13,32 @@ function App() {
   const [newGoal, setNewGoal] = useState({
     title: "",
     activity: "",
-    minmax: "",
+    minmax: "at least",
     number: 1,
     unit: "",
-    interval: "",
+    interval: "per day",
     actions: [],
   })
 
   function saveGoal() {
-    setData([...data, newGoal])
-    console.log("saved")
+    const duplicate = data.some(goal => goal.title === newGoal.title)
+    duplicate ? alert("Please use a unique Goal Name") : setData([...data, newGoal])
   }
 
-  console.log(data)
+  console.log("data", data)
+  
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div id="App">
+      <header id="App-header">
         <NavBar />
       </header>
 
-      <div className='App-body'>
+      <div id='App-body'>
         <Switch>
           <Route exact path="/"> <Home /> </Route>
           <Route path="/goals"> <GoalPage newGoal={newGoal} setNewGoal={setNewGoal} saveGoal={saveGoal} data={data} /> </Route>
-          <Route path="/log"> <LoggingPage /> </Route>
+          <Route path="/log"> <LogPage data={data}/> </Route>
           <Route path="/track"> <TrackingPage /> </Route>
         </Switch>
       </div>     

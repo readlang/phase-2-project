@@ -6,19 +6,19 @@ const navNonActiveStyle = {
     padding: "2px 10px",
     margin: "0 6px 6px",
     //background: "darkgray",
-    textDecoration: "none",
+    // textDecoration: "none",
     color: "gray",
 }
 
 const navActiveStyle = {
     color: "white",
     fontWeight: "500",
-    textDecorationLine: "underline"
+    // textDecorationLine: "underline"
 }
 
 function NavBar() {
     return(
-        <div>
+        <div id="navBar">
             
             <NavLink
                 to="/" exact
