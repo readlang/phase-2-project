@@ -17,7 +17,13 @@ function App() {
     number: 1,
     unit: "",
     interval: "per day",
-    actions: [],
+    activity: [],
+  })
+
+  const [newActivity, setNewActivity] = useState({
+    dateTime: "",
+    number: 1,
+    notes: "",
   })
 
   function saveGoal() {
@@ -38,7 +44,7 @@ function App() {
         <Switch>
           <Route exact path="/"> <Home /> </Route>
           <Route path="/goals"> <GoalPage newGoal={newGoal} setNewGoal={setNewGoal} saveGoal={saveGoal} data={data} /> </Route>
-          <Route path="/log"> <LogPage data={data}/> </Route>
+          <Route path="/log"> <LogPage newActivity={newActivity} setNewActivity={setNewActivity} data={data}/> </Route>
           <Route path="/track"> <TrackingPage /> </Route>
         </Switch>
       </div>     

@@ -1,21 +1,22 @@
 import React from "react";
 
-function LogAdd({ focus }) {
+function LogAdd({ focus, newActivity, setNewActivity }) {
     function handleSubmit(event) {
 		event.preventDefault()
-		console.log("submit", event.target[0].value)
+        focus.title ? console.log("submit", newActivity) : alert("First select one of your goals")
 	}
 
     return(
         <div id="logAdd">
             <h2>Log an Activity</h2>
-            <h3>{focus.title ? focus.title : focus}</h3>
-            <p>{focus.activity} {focus.minmax} {focus.number} {focus.unit} {focus.interval} </p>
+            <hr/>
+            <h3>{focus.title ? `Goal: ${focus.title}` : focus}</h3>
+            <p>Target: {focus.activity} {focus.minmax} {focus.number} {focus.unit} {focus.interval} </p>
             <br/>
             <form onSubmit={handleSubmit}>
-                <label>Date / Time</label> <input type="datetime-local"/>
+                <label>Date / Time of Activity</label> <input type="datetime-local" value={newActivity.dateTime} onChange={(e)=> setNewActivity({...newActivity, dateTime:e.target.value})}  />
                 <lable>How many {focus.unit}?</lable> <input type="number" />
-                <label>Notes?</label> <textarea rows="3" maxLength="100" placeholder="optional..." ></textarea>
+                <label>Notes?</label> <textarea rows="3" maxLength="100" placeholder="notes optional..." ></textarea>
                 <input type="submit" value="Save to Log"/>
             </form>
 
