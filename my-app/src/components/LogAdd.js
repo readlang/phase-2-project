@@ -15,7 +15,7 @@ function LogAdd({ focus }) {
             <form onSubmit={handleSubmit}>
                 <label>Date / Time</label> <input type="datetime-local"/>
                 <lable>How many {focus.unit}?</lable> <input type="number" />
-                <label>Notes?</label> <textarea rows="3" placeholder="optional..." ></textarea>
+                <label>Notes?</label> <textarea rows="3" maxLength="100" placeholder="optional..." ></textarea>
                 <input type="submit" value="Save to Log"/>
             </form>
 
