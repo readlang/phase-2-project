@@ -19,3 +19,4 @@ console.log(
     })
 )
 
+window.location.pathname === "/log" ? setFocus({...goal}) : null

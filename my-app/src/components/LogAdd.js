@@ -10,7 +10,7 @@ function LogAdd({ focus, newAction, setNewAction, saveAction }) {
 		<div id="logAdd">
 			<h2>Log an Activity</h2>
 			<hr/>
-			<h3>{focus.title ? `Goal: ${focus.title}` : focus}</h3>
+			<h3>{focus.title ? `Goal: ${focus.title}` : null}</h3>
 			<p>Target: {focus.activity} {focus.minmax} {focus.number} {focus.unit} {focus.interval} </p>
 			<br/>
 

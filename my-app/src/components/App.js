@@ -10,46 +10,6 @@ import LogPage from "./LogPage";
 import TrackingPage from "./TrackingPage"
 
 function App() {
-  // - this example Data is for testing purposes
-  const exampleData = [
-    {
-      "title": "Get in Shape",
-      "activity": "Lift weights",
-      "minmax": "at least",
-      "number": "3",
-      "unit": "times",
-      "interval": "per week",
-      actions: []
-    },
-    {
-      "title": "Running",
-      "activity": "Run",
-      "minmax": "at least",
-      "number": "10",
-      "unit": "miles",
-      "interval": "per week",
-      actions: []
-    },
-    {
-      "title": "Nutrition",
-      "activity": "Eat",
-      "minmax": "at most",
-      "number": "1",
-      "unit": "snack",
-      "interval": "per day",
-      actions: []
-    },
-    {
-      "title": "Sleep Health",
-      "activity": "Sleep",
-      "minmax": "at least",
-      "number": "8",
-      "unit": "hours",
-      "interval": "per day",
-      actions: []
-    }
-  ]
-
   const [data, setData] = useState([])
 
   useEffect(()=>{
@@ -74,14 +34,26 @@ function App() {
     notes: "",
   })
 
+  const [focus, setFocus ] = useState({})
+
   function saveGoal() {   // - checks if newGoal is unique before saving
     const duplicate = data.some(goal => goal.title === newGoal.title)   
-    duplicate ? alert("Please use a unique Goal Name") : setData([...data, newGoal])  
+    if (duplicate) {
+      alert("Please use a unique Goal Name")
+    } else {
+      fetch("http://localhost:4000/goalsDB", {
+        method: "POST",
+        headers: {"content-type": "application/json" },
+        body: JSON.stringify(newGoal)
+      })
+      .then(res=>res.json())
+      .then(d=> setData([...data, d]) )
+      
+    }
   }
 
   function saveAction(focusGoal) {
     const modGoal = {...focusGoal, actions: [...focusGoal.actions, newAction ]}
-    
     setData( data.map(eachGoal=>( eachGoal.title === focusGoal.title ? modGoal : eachGoal )) )
     console.log("action saved")
   }
@@ -99,12 +71,12 @@ function App() {
           <Route exact path="/"> <Home /> </Route>
           <Route path="/goals"> 
             <GoalPage >
-              <GoalList data={data}  />
+              <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
               <GoalAdd newGoal={newGoal} setNewGoal={setNewGoal} saveGoal={saveGoal} />
             </GoalPage> 
           </Route>
           <Route path="/log"> 
-            <LogPage newAction={newAction} setNewAction={setNewAction} data={data} saveAction={saveAction} /> 
+            <LogPage newAction={newAction} setNewAction={setNewAction} data={data} saveAction={saveAction} focus={focus} setFocus={setFocus} /> 
           </Route>
           <Route path="/track"> <TrackingPage /> </Route>
         </Switch>
