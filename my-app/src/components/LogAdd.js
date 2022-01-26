@@ -3,7 +3,7 @@ import React from "react";
 function LogAdd({ focus, newAction, setNewAction, saveAction }) {
 	function handleSubmit(event) {
 		event.preventDefault()
-		focus.title ? saveAction(focus) : alert("First select one of your goals")
+		focus.title ? saveAction() : alert("First select one of your goals")
 	}
 
 	return(

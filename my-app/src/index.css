@@ -55,6 +55,14 @@ a:visited {
   align-items: flex-start;
 }
 
+#trackingPage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 #goalList {
   margin: 10px;
   border: 1px solid;
@@ -87,6 +95,24 @@ a:visited {
   color: aqua;
   font-size: 15px;
   width: 300px;
+}
+
+#trackingList {
+  margin: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+  color: aqua;
+  width: 300px;
+}
+
+#trackBar {
+  margin: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+  color: aqua;
+  width: 640px;
 }
 
 form {

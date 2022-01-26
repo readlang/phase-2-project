@@ -6,7 +6,6 @@ function GoalList({ data, setData, focus, setFocus }) {
     fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
       method: "DELETE",
       headers: {"content-type": "application/json" },
-      //body: JSON.stringify(newGoal)
     })
     setData([...data.filter(x =>(x.id !== focus.id)) ])  
     setFocus({})

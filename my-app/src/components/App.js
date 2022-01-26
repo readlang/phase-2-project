@@ -8,6 +8,8 @@ import GoalPage from "./GoalPage"
   import GoalAdd from "./GoalAdd";
 import LogPage from "./LogPage";
 import TrackingPage from "./TrackingPage"
+import TrackingList from './TrackingList';
+import TrackBar from './TrackBar';
 
 function App() {
   const [data, setData] = useState([])
@@ -18,6 +20,7 @@ function App() {
     .then(d => setData(d))
   }, [])
 
+  //- this is used to add a goal
   const [newGoal, setNewGoal] = useState({
     title: "",
     activity: "",
@@ -28,12 +31,14 @@ function App() {
     actions: [],
   })
 
+  //- this is used to add an action
   const [newAction, setNewAction] = useState({
     dateTime: "",
     number: 1,
     notes: "",
   })
 
+  //- this is used to select a goal from the list
   const [focus, setFocus ] = useState({})
 
   function saveGoal() {   // - checks if newGoal is unique before saving
@@ -52,9 +57,15 @@ function App() {
     }
   }
 
-  function saveAction(focusGoal) {
-    const modGoal = {...focusGoal, actions: [...focusGoal.actions, newAction ]}
-    setData( data.map(eachGoal=>( eachGoal.title === focusGoal.title ? modGoal : eachGoal )) )
+  function saveAction() {
+    const modifiedGoal = {...focus, actions: [...focus.actions, newAction ]}
+    fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
+      method: "PATCH",
+      headers: {"content-type": "application/json" },
+      body: JSON.stringify(modifiedGoal)
+    })
+    .then(r=>r.json())
+    .then(resp=> setData( data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
     console.log("action saved")
   }
 
@@ -78,7 +89,13 @@ function App() {
           <Route path="/log"> 
             <LogPage newAction={newAction} setNewAction={setNewAction} data={data} saveAction={saveAction} focus={focus} setFocus={setFocus} /> 
           </Route>
-          <Route path="/track"> <TrackingPage /> </Route>
+          <Route path="/track"> 
+            <TrackingPage>
+              <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
+              <TrackingList focus={focus} />
+              <TrackBar focus={focus} />
+            </TrackingPage> 
+          </Route>
         </Switch>
       </div>     
     </div>

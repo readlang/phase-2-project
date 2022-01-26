@@ -1,8 +1,10 @@
 import React from "react";
 
-function TrackingPage() {
+function TrackingPage({ children }) {
     return(
-        <div>TrackingPage</div>
+        <div id="trackingPage">
+            {children}
+        </div>
     )
 }
 
