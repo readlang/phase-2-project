@@ -1,13 +1,9 @@
 import React from "react";
-import GoalAdd from "./GoalAdd";
-import GoalList from "./GoalList";
 
-
-function GoalPage({ newGoal, setNewGoal, saveGoal, data }) {
+function GoalPage({ children }) {
     return(
         <div id="goalPage">
-            <GoalList data={data}  />
-            <GoalAdd newGoal={newGoal} setNewGoal={setNewGoal} saveGoal={()=>saveGoal()} />
+            { children }
         </div>
     )
 }
