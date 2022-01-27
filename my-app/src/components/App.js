@@ -57,6 +57,10 @@ function App() {
     }
   }
 
+  // there's a bug where app won't save multiple back to back logged activities
+  // I suspect it has to do with state getting updated
+  // When you change the focus, it forces a state update
+
   function saveAction() {
     const modifiedGoal = {...focus, actions: [...focus.actions, newAction ]}
     fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
@@ -93,7 +97,7 @@ function App() {
             <TrackingPage>
               <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
               <TrackingList focus={focus} />
-              <TrackBar focus={focus} />
+              { focus.title ? <TrackBar focus={focus} /> : null }
             </TrackingPage> 
           </Route>
         </Switch>

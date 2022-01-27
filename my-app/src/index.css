@@ -113,6 +113,30 @@ a:visited {
   padding: 10px;
   color: aqua;
   width: 640px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#trackDay {
+  padding: 0px 5px;
+  height: 40px;
+  font-size: x-small;
+}
+
+#gaugedaypurple {
+  background-color: rgb(255, 0, 136);
+  height: 20px;
+  width: auto;
+}
+
+#gaugedayblue {
+  background-color: blue;
+  height: 20px;
+  width: auto;
 }
 
 form {
