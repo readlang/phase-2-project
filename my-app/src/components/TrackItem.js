@@ -8,7 +8,7 @@ function TrackItem({action, focus}) {
     let DT = action.dateTime.split(/[-,"T",:]/) 
     if (DT[3] > 12) { DT[3] = String(DT[3]-12); ampm = "p" }
     
-    console.log(DT)
+    //console.log(DT)
 
     return(
         <div id="trackItem">

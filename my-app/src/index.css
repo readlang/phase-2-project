@@ -127,14 +127,21 @@ a:visited {
   font-size: x-small;
 }
 
-#gaugedaypurple {
+#gaugeDayYes {
   background-color: rgb(255, 0, 136);
   height: 20px;
   width: auto;
 }
 
-#gaugedayblue {
-  background-color: blue;
+#gaugeDayNo {
+  
+  border: 1px solid aqua;
+  height: 20px;
+  width: auto;
+}
+
+#gaugeDayNoData {
+  border: 1px solid rgb(85, 85, 85);
   height: 20px;
   width: auto;
 }

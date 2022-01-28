@@ -17,3 +17,9 @@ console.log(a)
 
 console.log( a.replace("-", "/") )
 
+for (let index = 0; index < 100; index++) {
+    console.log( Math.round( Math.random()*1000))    
+    
+}
+
+       

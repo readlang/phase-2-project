@@ -1,8 +1,11 @@
 import React from "react";
 
-function TrackDay({date}) {
-    const conditionalID = "gaugedayblue"
+function TrackDay({date, goal}) {
+    let conditionalID = "gaugeDayNo"
 
+    if (goal) {
+        conditionalID = "gaugeDayYes"
+    }
 
     return(
         <div id="trackDay">
@@ -11,5 +14,5 @@ function TrackDay({date}) {
         </div>
     )
 }
-
+ 
 export default TrackDay;

@@ -62,7 +62,9 @@ function App() {
   // When you change the focus, it forces a state update
 
   function saveAction() {
+    
     const modifiedGoal = {...focus, actions: [...focus.actions, newAction ]}
+    console.log(modifiedGoal)
     fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
       method: "PATCH",
       headers: {"content-type": "application/json" },
@@ -73,7 +75,7 @@ function App() {
     console.log("action saved")
   }
 
-  console.log("data", data)
+  //console.log("data", data)
   
   return (
     <div id="App">
