@@ -61,10 +61,21 @@ function App() {
   // I suspect it has to do with state getting updated
   // When you change the focus, it forces a state update
 
+  //it doesn't work because the "focus" state is old, it doesn't have the newest action incorporated into it.
+
   function saveAction() {
+
+    let modifiedActions = [...focus.actions]
+
+    // let modifiedActions = [ ...data[ focus.id - 1 ].actions]  // working on this line...  This won't work once you delete an item...
+              //since the array index won't be in sync with the focus.id
     
-    const modifiedGoal = {...focus, actions: [...focus.actions, newAction ]}
-    console.log(modifiedGoal)
+    modifiedActions.push(newAction)
+
+    const modifiedGoal = {...focus, actions: modifiedActions}
+    setFocus( {...focus, actions: modifiedActions} )
+    console.log("focus", focus)
+    console.log("modifiedGoal", modifiedGoal)
     fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
       method: "PATCH",
       headers: {"content-type": "application/json" },
@@ -74,9 +85,7 @@ function App() {
     .then(resp=> setData( data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
     console.log("action saved")
   }
-
-  //console.log("data", data)
-  
+   
   return (
     <div id="App">
       <header id="App-header">
