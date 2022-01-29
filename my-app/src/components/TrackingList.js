@@ -10,7 +10,7 @@ function TrackingList({ focus  }) {
                 <h2>{focus.title}</h2>
                 <hr/>
                 {focus.actions[0] ? null : "no actions logged yet"}
-                {focus.actions.map(action=> <TrackItem key={action.dateTime + Math.round( Math.random()*100)} action={action} focus={focus} />  )}
+                {focus.actions.map(action=> <TrackItem key={action.id} action={action} focus={focus} />  )}
             </div>
         )
     } else {
