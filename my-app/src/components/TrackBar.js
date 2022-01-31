@@ -7,14 +7,31 @@ function TrackBar({focus}) {
     for (let index = 13; index >= 0; index--) {
         const today = new Date()
         today.setDate(today.getDate() - index ) 
-        let achieved = false
+        let achieved = "noData"
+        let singleDayTotal = 0
+
         focus.actions.map((item)=>{ if (item.dateTime.slice(0, 10) === today.toISOString().slice(0, 10) ) {
-            achieved = true
+            achieved = "yesData"
+            singleDayTotal = singleDayTotal + item.number
+            // This is first only going to work for "per day" goals...
+            console.log(singleDayTotal)
+
+            if ( focus.minmax === "at least" && singleDayTotal >= focus.number ) {
+                achieved = "goalAchieved"
+            }  
+            if ( focus.minmax === "at most" && singleDayTotal <= focus.number ) {
+                achieved = "goalAchieved"
+            }
+            if (focus.minmax === "exactly" && singleDayTotal === focus.number ) {
+                achieved = "goalAchieved"
+            }
+
         }} )
 
         dateArray.push( {
             date: today.toISOString().slice(5, 10).replace("-","/"),
-            goal: achieved
+            goal: achieved,
+            number: singleDayTotal
         } )        
     }
 
@@ -23,7 +40,7 @@ function TrackBar({focus}) {
     return(
         <div id="trackBar">
             <h3>{focus.title}&emsp;</h3>
-            { dateArray.map(item => <TrackDay key={item.date} date={item.date} goal={item.goal} /> ) }
+            { dateArray.map(item => <TrackDay key={item.date} dateitem={item} /> ) }
             
 
         </div>

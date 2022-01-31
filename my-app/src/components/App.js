@@ -54,10 +54,7 @@ function App() {
     }
   }
 
-
-
   function saveAction() {
-
     let modifiedActions = [...focus.actions]
     modifiedActions.push( {...newAction, id: Math.round(Math.random()*10000) })
     const modifiedGoal = {...focus, actions: modifiedActions}
@@ -71,8 +68,6 @@ function App() {
     .then(r=>r.json())
     .then(resp=> setData( data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
   }
-  
-  
 
   function deleteAction (id) {
     

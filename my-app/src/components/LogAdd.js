@@ -18,7 +18,7 @@ function LogAdd({ focus, newAction, setNewAction, saveAction }) {
 					<label>Date / Time of Activity</label> 
 				<input type="datetime-local" value={newAction.dateTime} onChange={(e)=> setNewAction({...newAction, dateTime:e.target.value})} />
 					<label>How many {focus.unit}?</label> 
-				<input type="number" value={newAction.number} onChange={e=>setNewAction({...newAction, number:e.target.value})} />
+				<input type="number" value={newAction.number} onChange={e=>setNewAction({...newAction, number: Number(e.target.value) })} />
 					<label>Notes?</label> 
 				<textarea rows="3" maxLength="100" placeholder="optional..." value={newAction.notes} onChange={e=>setNewAction({...newAction, notes:e.target.value})} />
 				{ newAction.dateTime !== "" ? <input type="submit" value="Save to Log"/> : <p>Please complete form to save...</p> }
