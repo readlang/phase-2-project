@@ -61,8 +61,8 @@ function App() {
     let modifiedActions = [...focus.actions]
     modifiedActions.push( {...newAction, id: Math.round(Math.random()*10000) })
     const modifiedGoal = {...focus, actions: modifiedActions}
-
     setFocus( modifiedGoal )
+
     fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
       method: "PATCH",
       headers: {"content-type": "application/json" },
@@ -74,8 +74,20 @@ function App() {
   
   
 
-  function deleteAction (item) {
+  function deleteAction (id) {
     
+    let modifiedActions = [...focus.actions].filter(action=>(action.id !== id ))
+    const modifiedGoal = {...focus, actions: modifiedActions}
+    setFocus( modifiedGoal )
+
+    fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
+        method: "PATCH",
+        headers: {"content-type": "application/json" },
+        body: JSON.stringify(modifiedGoal)
+    })
+
+    .then(r=>r.json())
+    .then(resp=> setData(data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
   }
 
   return (
@@ -99,7 +111,7 @@ function App() {
           <Route path="/track"> 
             <TrackingPage>
               <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
-              <TrackingList focus={focus} />
+              <TrackingList focus={focus} deleteAction={deleteAction}/>
               { focus.title ? <TrackBar focus={focus} /> : null }
             </TrackingPage> 
           </Route>

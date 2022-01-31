@@ -1,7 +1,7 @@
 import React from "react";
 import TrackItem from "./TrackItem";
 
-function TrackingList({ focus  }) {
+function TrackingList({ focus, deleteAction  }) {
 
     // check if there is a focus yet
     if (focus.title) {
@@ -10,7 +10,7 @@ function TrackingList({ focus  }) {
                 <h2>{focus.title}</h2>
                 <hr/>
                 {focus.actions[0] ? null : "no actions logged yet"}
-                {focus.actions.map(action=> <TrackItem key={action.id} action={action} focus={focus} />  )}
+                {focus.actions.map(action=> <TrackItem key={action.id} action={action} focus={focus} deleteAction={deleteAction} />  )}
             </div>
         )
     } else {

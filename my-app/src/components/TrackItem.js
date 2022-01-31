@@ -1,25 +1,9 @@
 import React from "react";
 
-function TrackItem({action, focus}) {
+function TrackItem({ action, focus, deleteAction }) {
+
     function handleDeleteClick() {
-        console.log("delete action", action.id)
-        console.log("focus actions", focus.actions)
-
-        let modifiedActions = [...focus.actions].filter(x=>(x.id !== action.id ))
-        const modifiedGoal = {...focus, actions: modifiedActions}
-
-
-        fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
-            method: "PATCH",
-            headers: {"content-type": "application/json" },
-            body: JSON.stringify(modifiedGoal)
-        })
-        // - this never updates the setfocus variable OR the setdata variable... need to add that code
-        // maybe this fetch should be moved to the App component.  Then it can access everything needed there...
-        // deleteAction(action.id)  ?
-        .then(r=>r.json())
-        .then(d=>console.log(d))
-
+        deleteAction(action.id)
     }
     
     let ampm = "a"
