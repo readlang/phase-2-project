@@ -39,6 +39,7 @@ function App() {
 
   const [focus, setFocus ] = useState({})
 
+
   function saveGoal() {   // - checks if newGoal is unique before saving
     const duplicate = data.some(goal => goal.title === newGoal.title)   
     if (duplicate) {
@@ -54,6 +55,7 @@ function App() {
     }
   }
 
+
   function saveAction() {
     let modifiedActions = [...focus.actions]
     modifiedActions.push( {...newAction, id: Math.round(Math.random()*10000) })
@@ -68,6 +70,7 @@ function App() {
     .then(r=>r.json())
     .then(resp=> setData( data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
   }
+
 
   function deleteAction (id) {
     
@@ -85,6 +88,7 @@ function App() {
     .then(resp=> setData(data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
   }
 
+  
   return (
     <div id="App">
       <header id="App-header">

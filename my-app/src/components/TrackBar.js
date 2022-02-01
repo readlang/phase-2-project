@@ -25,15 +25,15 @@ function TrackBar({focus}) {
 
             if ( focus.minmax === "at least" && singleDayTotal >= focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
-                firstWeekAchievedCounter += 1
+                secondWeek ? secondWeekAchievedCounter += 1 : firstWeekAchievedCounter += 1
             }  
             if ( focus.minmax === "at most" && singleDayTotal <= focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
-                firstWeekAchievedCounter += 1
+                secondWeek ? secondWeekAchievedCounter += 1 : firstWeekAchievedCounter += 1
             }
             if (focus.minmax === "exactly" && singleDayTotal === focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
-                firstWeekAchievedCounter += 1
+                secondWeek ? secondWeekAchievedCounter += 1 : firstWeekAchievedCounter += 1
             }
 
         }} )
@@ -88,14 +88,14 @@ function TrackBar({focus}) {
                 <h4>Summary</h4>
                 <p>Past 7 days total: &nbsp; &ensp; {secondWeekTotal} {focus.unit} &emsp;
                     {focus.interval === "per day" ? 
-                        "daily" 
+                        `daily goal achieved ${secondWeekAchievedCounter} days`
                         : 
-                        secondWeekAchieved ? " Weekly Goal Achieved! Well Done!" : " Goal not achieved. There's always time to improve." 
+                        secondWeekAchieved ? " Weekly Goal Achieved! Well Done!" : " Goal not achieved. There's always time to improve!" 
                     } 
                 </p>
                 <p>Days 8 - 14 total: &nbsp; &ensp; {firstWeekTotal} {focus.unit} &emsp;
                     {focus.interval === "per day" ? 
-                        firstWeekAchievedCounter 
+                        `daily goal achieved ${firstWeekAchievedCounter} days`
                         : 
                         firstWeekAchieved ? " Weekly Goal Achieved! Well Done!" : " Goal not achieved. " 
                     }
