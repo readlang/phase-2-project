@@ -15,7 +15,7 @@ function TrackDay({ dateitem }) {
 
     return(
         <div id="trackDay">
-            {number}
+            &ensp; {number}
             <div id={conditionalID} />
             {date}
         </div>

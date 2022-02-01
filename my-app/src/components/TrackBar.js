@@ -7,6 +7,8 @@ function TrackBar({focus}) {
     let firstWeekTotal = 0
     let secondWeekTotal = 0
     let twoWeekTotal = 0
+    let firstWeekAchievedCounter = 0
+    let secondWeekAchievedCounter = 0
         
     for (let index = 13; index >= 0; index--) {
         const today = new Date()
@@ -21,14 +23,17 @@ function TrackBar({focus}) {
             // This is first only going to work for "per day" goals...
             console.log("singleDayTotal:", singleDayTotal)
 
-            if ( focus.minmax === "at least" && singleDayTotal >= focus.number ) {
+            if ( focus.minmax === "at least" && singleDayTotal >= focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
+                firstWeekAchievedCounter += 1
             }  
-            if ( focus.minmax === "at most" && singleDayTotal <= focus.number ) {
+            if ( focus.minmax === "at most" && singleDayTotal <= focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
+                firstWeekAchievedCounter += 1
             }
-            if (focus.minmax === "exactly" && singleDayTotal === focus.number ) {
+            if (focus.minmax === "exactly" && singleDayTotal === focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
+                firstWeekAchievedCounter += 1
             }
 
         }} )
@@ -46,6 +51,25 @@ function TrackBar({focus}) {
     console.log(dateArray)  
     console.log("secondWeekTotal", secondWeekTotal)
     console.log("firstWeekTotal", firstWeekTotal)
+
+    let firstWeekAchieved = false
+    let secondWeekAchieved = false
+
+    if (focus.interval === "per week") {
+        if (focus.minmax === "at least" ) {
+            firstWeekTotal >= focus.number ? firstWeekAchieved = true : firstWeekAchieved = false
+            secondWeekTotal >= focus.number ? secondWeekAchieved = true : secondWeekAchieved = false
+        }
+        if (focus.minmax === "at most" ) {
+            firstWeekTotal <= focus.number ? firstWeekAchieved = true : firstWeekAchieved = false
+            secondWeekTotal <= focus.number ? secondWeekAchieved = true : secondWeekAchieved = false            
+        }
+        if (focus.minmax === "exactly" ) {
+            firstWeekTotal === focus.number ? firstWeekAchieved = true : firstWeekAchieved = false
+            secondWeekTotal === focus.number ? secondWeekAchieved = true : secondWeekAchieved = false
+        }
+    }
+    
     
     return(
         <div id="trackBar">
@@ -56,14 +80,27 @@ function TrackBar({focus}) {
                 </div>
                 { dateArray.map(item => <TrackDay key={item.date} dateitem={item} /> ) }
                 <div>
-                    {twoWeekTotal} {focus.unit} <br/> total
+                    
                 </div>
             </div>   
             <hr/> 
             <div id="trackBarSummary">
                 <h4>Summary</h4>
-                <p>Last week total: {secondWeekTotal} {focus.unit} </p>
-                <p>Week prior total: {firstWeekTotal} {focus.unit} </p>
+                <p>Past 7 days total: &nbsp; &ensp; {secondWeekTotal} {focus.unit} &emsp;
+                    {focus.interval === "per day" ? 
+                        "daily" 
+                        : 
+                        secondWeekAchieved ? " Weekly Goal Achieved! Well Done!" : " Goal not achieved. There's always time to improve." 
+                    } 
+                </p>
+                <p>Days 8 - 14 total: &nbsp; &ensp; {firstWeekTotal} {focus.unit} &emsp;
+                    {focus.interval === "per day" ? 
+                        firstWeekAchievedCounter 
+                        : 
+                        firstWeekAchieved ? " Weekly Goal Achieved! Well Done!" : " Goal not achieved. " 
+                    }
+                </p>
+                <p>Past 14 days total: &ensp; {twoWeekTotal} {focus.unit} </p>
             </div>
         </div>
     )
