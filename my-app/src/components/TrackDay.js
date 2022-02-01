@@ -3,7 +3,7 @@ import React from "react";
 function TrackDay({ dateitem }) {
     let { date, goal, number } = dateitem
 
-    console.log("date", date, "goal", goal)
+    //console.log("date", date, "goal", goal)
 
     let conditionalID = "gaugeDayNoData"
 

@@ -106,7 +106,7 @@ a:visited {
   width: 300px;
 }
 
-#trackBar {
+#trackBarFlex {
   margin: 10px;
   border: 1px solid;
   border-radius: 5px;
@@ -122,9 +122,9 @@ a:visited {
 }
 
 #trackDay {
-  padding: 0px 5px;
+  padding: 0px 3px;
   height: 40px;
-  font-size: x-small;
+  font-size: xx-small;
 }
 
 #gaugeDayNoData {
