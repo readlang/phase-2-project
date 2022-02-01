@@ -106,19 +106,27 @@ a:visited {
   width: 300px;
 }
 
-#trackBarFlex {
+#trackBar {
   margin: 10px;
   border: 1px solid;
   border-radius: 5px;
   padding: 10px;
   color: aqua;
   width: 640px;
+}
+
+#trackBarFlex {
+
 
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
+}
+
+#trackBarSummary {
+  display: flex;
 }
 
 #trackDay {

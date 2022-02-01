@@ -48,17 +48,23 @@ function TrackBar({focus}) {
     console.log("firstWeekTotal", firstWeekTotal)
     
     return(
-        <div id="trackBarFlex">
-            <div>
-                <h3>{focus.title}&emsp;</h3>
-                <p> {focus.interval === "per day" ? "Daily Goal" : "Weekly Goal"  } &emsp; </p>
+        <div id="trackBar">
+            <div id="trackBarFlex">
+                <div>
+                    <h3>{focus.title}&emsp;</h3>
+                    <p> {focus.interval === "per day" ? "Daily Goal" : "Weekly Goal"  } &emsp; </p>
+                </div>
+                { dateArray.map(item => <TrackDay key={item.date} dateitem={item} /> ) }
+                <div>
+                    {twoWeekTotal} {focus.unit} <br/> total
+                </div>
+            </div>   
+            <hr/> 
+            <div id="trackBarSummary">
+                <h4>Summary</h4>
+                <p>Last week total: {secondWeekTotal} {focus.unit} </p>
+                <p>Week prior total: {firstWeekTotal} {focus.unit} </p>
             </div>
-            { dateArray.map(item => <TrackDay key={item.date} dateitem={item} /> ) }
-            <div>
-                {twoWeekTotal} {focus.unit} <br/> total
-            </div>
-            
-
         </div>
     )
 }
