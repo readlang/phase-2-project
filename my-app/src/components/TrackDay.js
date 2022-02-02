@@ -7,7 +7,7 @@ function TrackDay({ dateitem }) {
 
     let conditionalID = "gaugeDayNoData"
 
-    if (goal === "yesData") {
+    if (goal === "dataReceived") {
         conditionalID = "gaugeDayNo"
     } else if (goal === "goalAchieved") {
         conditionalID = "gaugeDayYes"

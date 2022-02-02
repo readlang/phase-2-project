@@ -18,11 +18,9 @@ function TrackBar({focus}) {
         if (index <= 6) {secondWeek = true}
 
         focus.actions.map((item)=>{ if (item.dateTime.slice(0, 10) === today.toISOString().slice(0, 10) ) {
-            achieved = "yesData"
+            achieved = "dataReceived"
             singleDayTotal = singleDayTotal + item.number
-            // This is first only going to work for "per day" goals...
-            console.log("singleDayTotal:", singleDayTotal)
-
+            
             if ( focus.minmax === "at least" && singleDayTotal >= focus.number && focus.interval === "per day" ) {
                 achieved = "goalAchieved"
                 secondWeek ? secondWeekAchievedCounter += 1 : firstWeekAchievedCounter += 1
@@ -36,7 +34,7 @@ function TrackBar({focus}) {
                 secondWeek ? secondWeekAchievedCounter += 1 : firstWeekAchievedCounter += 1
             }
 
-        }} )
+        }})
 
         dateArray.push( {
             date: today.toISOString().slice(5, 10).replace("-","/"),
@@ -52,8 +50,8 @@ function TrackBar({focus}) {
     console.log("secondWeekTotal", secondWeekTotal)
     console.log("firstWeekTotal", firstWeekTotal)
 
-    let firstWeekAchieved = false
-    let secondWeekAchieved = false
+    let firstWeekAchieved
+    let secondWeekAchieved
 
     if (focus.interval === "per week") {
         if (focus.minmax === "at least" ) {
