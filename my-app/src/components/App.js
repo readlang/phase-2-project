@@ -62,7 +62,7 @@ function App() {
 
   function deleteAction (id) {
     
-    let modifiedActions = [...focus.actions].filter(action=>(action.id !== id ))
+    let modifiedActions = focus.actions.filter(action=>(action.id !== id ))
     const modifiedGoal = {...focus, actions: modifiedActions}
     setFocus( modifiedGoal )
 
