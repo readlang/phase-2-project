@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
-function GoalAdd({ newGoal, setNewGoal, saveGoal }) {
+function GoalAdd({ saveGoal }) {
+
+	const initialState = {
+		title: "",
+		activity: "",
+		minmax: "at least",
+		number: 1,
+		unit: "",
+		interval: "per day",
+		actions: [],
+	}
+
+	const [newGoal, setNewGoal] = useState( initialState )
+
 	function handleSubmit(event) {
 		event.preventDefault()
-		saveGoal() 
+		saveGoal(newGoal) 
+		setNewGoal(initialState)
 	}
 
   return(

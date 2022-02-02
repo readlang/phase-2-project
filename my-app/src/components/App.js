@@ -20,15 +20,7 @@ function App() {
     .then(d => setData(d))
   }, [])
 
-  const [newGoal, setNewGoal] = useState({
-    title: "",
-    activity: "",
-    minmax: "at least",
-    number: 1,
-    unit: "",
-    interval: "per day",
-    actions: [],
-  })
+
 
   const [newAction, setNewAction] = useState({
     id: "",
@@ -40,7 +32,7 @@ function App() {
   const [focus, setFocus ] = useState({})
 
 
-  function saveGoal() {   // - checks if newGoal is unique before saving
+  function saveGoal(newGoal) {   // - checks if newGoal is unique before saving
     const duplicate = data.some(goal => goal.title === newGoal.title)   
     if (duplicate) {
       alert("Please use a unique Goal Name")
@@ -88,7 +80,7 @@ function App() {
     .then(resp=> setData(data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
   }
 
-  
+
   return (
     <div id="App">
       <header id="App-header">
@@ -101,7 +93,7 @@ function App() {
           <Route path="/goals"> 
             <GoalPage >
               <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
-              <GoalAdd newGoal={newGoal} setNewGoal={setNewGoal} saveGoal={saveGoal} />
+              <GoalAdd saveGoal={saveGoal} />
             </GoalPage> 
           </Route>
           <Route path="/log"> 
