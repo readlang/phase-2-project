@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function LogAdd({ focus, newAction, setNewAction, saveAction }) {
 	function handleSubmit(event) {

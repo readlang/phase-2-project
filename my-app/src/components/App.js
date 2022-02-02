@@ -12,15 +12,13 @@ import TrackingList from './TrackingList';
 import TrackBar from './TrackBar';
 
 function App() {
-  const [data, setData] = useState([])
+  const [allGoalData, setAllGoalData] = useState([])
 
   useEffect(()=>{
     fetch("http://localhost:4000/goalsDB")
     .then(r => r.json())
-    .then(d => setData(d))
+    .then(d => setAllGoalData(d))
   }, [])
-
-
 
   const [newAction, setNewAction] = useState({
     id: "",
@@ -31,9 +29,8 @@ function App() {
 
   const [focus, setFocus ] = useState({})
 
-
   function saveGoal(newGoal) {   // - checks if newGoal is unique before saving
-    const duplicate = data.some(goal => goal.title === newGoal.title)   
+    const duplicate = allGoalData.some(goal => goal.title === newGoal.title)   
     if (duplicate) {
       alert("Please use a unique Goal Name")
     } else {
@@ -43,10 +40,9 @@ function App() {
         body: JSON.stringify(newGoal)
       })
       .then(res=>res.json())
-      .then(d=> setData([...data, d]) )
+      .then(d=> setAllGoalData([...allGoalData, d]) )
     }
   }
-
 
   function saveAction() {
     let modifiedActions = [...focus.actions]
@@ -60,7 +56,7 @@ function App() {
       body: JSON.stringify(modifiedGoal)
     })
     .then(r=>r.json())
-    .then(resp=> setData( data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
+    .then(resp=> setAllGoalData( allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
   }
 
 
@@ -77,7 +73,7 @@ function App() {
     })
 
     .then(r=>r.json())
-    .then(resp=> setData(data.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
+    .then(resp=> setAllGoalData(allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
   }
 
 
@@ -92,16 +88,16 @@ function App() {
           <Route exact path="/"> <Home /> </Route>
           <Route path="/goals"> 
             <GoalPage >
-              <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
+              <GoalList allGoalData={allGoalData} setAllGoalData={setAllGoalData } focus={focus} setFocus={setFocus} />
               <GoalAdd saveGoal={saveGoal} />
             </GoalPage> 
           </Route>
           <Route path="/log"> 
-            <LogPage newAction={newAction} setNewAction={setNewAction} data={data} saveAction={saveAction} focus={focus} setFocus={setFocus} /> 
+            <LogPage newAction={newAction} setNewAction={setNewAction} allGoalData={allGoalData} saveAction={saveAction} focus={focus} setFocus={setFocus} /> 
           </Route>
           <Route path="/track"> 
             <TrackingPage>
-              <GoalList data={data} setData={setData } focus={focus} setFocus={setFocus} />
+              <GoalList allGoalData={allGoalData} setAllGoalData={setAllGoalData } focus={focus} setFocus={setFocus} />
               <TrackingList focus={focus} deleteAction={deleteAction}/>
               { focus.title ? <TrackBar focus={focus} /> : null }
             </TrackingPage> 
