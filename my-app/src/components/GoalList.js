@@ -7,7 +7,7 @@ function GoalList({ allGoalData, setAllGoalData, focus, setFocus }) {
       method: "DELETE",
       headers: {"content-type": "application/json" },
     })
-    setAllGoalData( allGoalData.filter(x =>(x.id !== focus.id)) )  
+    setAllGoalData( allGoalData.filter(eachgoal =>(eachgoal.id !== focus.id)) )  
     setFocus({})
   }
 

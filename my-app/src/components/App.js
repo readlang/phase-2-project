@@ -30,7 +30,7 @@ function App() {
   const [focus, setFocus ] = useState({})
 
   function saveGoal(newGoal) {   // - checks if newGoal is unique before saving
-    const duplicate = allGoalData.some(goal => goal.title === newGoal.title)   
+    const duplicate = allGoalData.some(eachGoal => eachGoal.title === newGoal.title)   
     if (duplicate) {
       alert("Please use a unique Goal Name")
     } else {
@@ -40,7 +40,7 @@ function App() {
         body: JSON.stringify(newGoal)
       })
       .then(res=>res.json())
-      .then(d=> setAllGoalData([...allGoalData, d]) )
+      .then(newGoalReturn => setAllGoalData([...allGoalData, newGoalReturn]) )
     }
   }
 
