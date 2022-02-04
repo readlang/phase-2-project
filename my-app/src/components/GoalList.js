@@ -2,6 +2,7 @@ import React from "react";
 import GoalItem from "./GoalItem";
 
 function GoalList({ allGoalData, setAllGoalData, focus, setFocus }) {
+  
   function deleteGoal() {
     fetch(`http://localhost:4000/goalsDB/${focus.id}`, {
       method: "DELETE",

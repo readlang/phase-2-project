@@ -20,10 +20,10 @@ function GoalAdd({ saveGoal }) {
 		setNewGoal(initialState)
 	}
 
-  return(
-   	<div id="goalAdd">
-      <h2>Add a Goal</h2>   
-      <form onSubmit={handleSubmit}>
+  	return(
+		<div id="goalAdd">
+			<h2>Add a Goal</h2>   
+			<form onSubmit={handleSubmit}>
 				<label>Name: </label>		
 				<input type="text" id="title" name="title" placeholder="Get in Shape" value={newGoal.title} onChange={(e)=> setNewGoal({...newGoal, title:e.target.value })  }/>  <br/>
 				<label>Activity: </label>	
@@ -48,8 +48,8 @@ function GoalAdd({ saveGoal }) {
 				<p>	{newGoal.activity} {newGoal.activity !== "" ? newGoal.minmax : "" } {newGoal.activity !=="" ? newGoal.number : "" } {newGoal.unit} {newGoal.activity ? newGoal.interval : ""} </p>
 				<input type="submit" value="Save Goal"/>
 			</form>
-    </div>
-  )
+		</div>
+  	)
 }
 
 export default GoalAdd;

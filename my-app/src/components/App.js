@@ -49,7 +49,7 @@ function App() {
       body: JSON.stringify(modifiedGoal)
     })
     .then(r=>r.json())
-    .then(resp=> setAllGoalData( allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
+    .then(respModGoal=> setAllGoalData( allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? respModGoal : eachGoal )) ) )
   }
 
   function deleteAction (id) {
@@ -63,7 +63,7 @@ function App() {
         body: JSON.stringify(modifiedGoal)
     })
     .then(r=>r.json())
-    .then(resp=> setAllGoalData(allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
+    .then(respModGoal=> setAllGoalData(allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? respModGoal : eachGoal ))  ) )
   }
 
   return (
