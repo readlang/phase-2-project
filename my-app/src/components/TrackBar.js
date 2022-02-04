@@ -46,9 +46,9 @@ function TrackBar({focus}) {
         twoWeekTotal += singleDayTotal
     }
 
-    console.log(dateArray)  
-    console.log("secondWeekTotal", secondWeekTotal)
-    console.log("firstWeekTotal", firstWeekTotal)
+    // console.log(dateArray)  
+    // console.log("secondWeekTotal", secondWeekTotal)
+    // console.log("firstWeekTotal", firstWeekTotal)
 
     let firstWeekAchieved
     let secondWeekAchieved

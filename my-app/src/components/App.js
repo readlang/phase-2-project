@@ -20,13 +20,6 @@ function App() {
     .then(d => setAllGoalData(d))
   }, [])
 
-  const [newAction, setNewAction] = useState({
-    id: "",
-    dateTime: "",
-    number: 1,
-    notes: "",
-  })
-
   const [focus, setFocus ] = useState({})
 
   function saveGoal(newGoal) {   // - checks if newGoal is unique before saving
@@ -44,7 +37,7 @@ function App() {
     }
   }
 
-  function saveAction() {
+  function saveAction(newAction) {
     let modifiedActions = [...focus.actions]
     modifiedActions.push( {...newAction, id: Math.round(Math.random()*10000) })
     const modifiedGoal = {...focus, actions: modifiedActions}
@@ -59,9 +52,7 @@ function App() {
     .then(resp=> setAllGoalData( allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal )) ) )
   }
 
-
   function deleteAction (id) {
-    
     let modifiedActions = focus.actions.filter(action=>(action.id !== id ))
     const modifiedGoal = {...focus, actions: modifiedActions}
     setFocus( modifiedGoal )
@@ -71,17 +62,13 @@ function App() {
         headers: {"content-type": "application/json" },
         body: JSON.stringify(modifiedGoal)
     })
-
     .then(r=>r.json())
     .then(resp=> setAllGoalData(allGoalData.map(eachGoal=>( eachGoal.title === focus.title ? resp : eachGoal ))  ) )
   }
 
-
   return (
     <div id="App">
-      <header id="App-header">
-        <NavBar />
-      </header>
+      <header id="App-header"> <NavBar /> </header>
 
       <div id='App-body'>
         <Switch>
@@ -93,7 +80,7 @@ function App() {
             </GoalPage> 
           </Route>
           <Route path="/log"> 
-            <LogPage newAction={newAction} setNewAction={setNewAction} allGoalData={allGoalData} saveAction={saveAction} focus={focus} setFocus={setFocus} /> 
+            <LogPage allGoalData={allGoalData} saveAction={saveAction} focus={focus} setFocus={setFocus} /> 
           </Route>
           <Route path="/track"> 
             <TrackingPage>
