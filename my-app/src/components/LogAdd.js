@@ -2,16 +2,19 @@ import React, {useState} from "react";
 
 function LogAdd({ focus, saveAction }) {
 
-	const [newAction, setNewAction] = useState({
+	const initialState = {
 		id: "",
 		dateTime: "",
 		number: 1,
 		notes: "",
-	})
+	}
+
+	const [newAction, setNewAction] = useState( initialState )
 
 	function handleSubmit(event) {
 		event.preventDefault()
 		focus.title ? saveAction(newAction) : alert("First select one of your goals")
+		setNewAction( initialState )
 	}
 
 	return(
